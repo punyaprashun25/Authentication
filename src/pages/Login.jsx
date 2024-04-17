@@ -15,29 +15,37 @@ const Login = () => {
     password: ""
   }
   const [formData, setFormData] = useState(initialState);
-  const [userAuthenticated, setUserAuthenticated] = useState(false);
 
   const HandleOnChange = (event) => {
     const name = event.target.id;
     const value = event.target.value;
     setFormData(values => ({ ...values, [name]: value }));
   }
+  const userNameExist = ()=>{
+    for(let i = 0; i<users.length; i++){
+        if(users[i].username === formData.username)
+          return true;
+        else  
+          return false;
+    }
+  }
   const HandleSubmit = (event) => {
     event.preventDefault();
-    users.forEach((user) => {
-      if (user.username === formData.username) {
-        if (user.password === formData.password) {
-          dispatch(update({ loggedIn: true, userData: user }))
-          setUserAuthenticated(true);
-          Navigate('/');
+    if(userNameExist())
+    {
+      users.forEach((user) => {
+        if (user.username === formData.username) {
+          if (user.password === formData.password) {
+            dispatch(update({ loggedIn: true, userData: user }))
+            Navigate('/');
+          }
+          else {
+            alert("Login Credentials are incorrect!")
+          }
         }
-        else {
-          alert("Login Credentials are incorrect!")
-        }
-      }
-    })
-
-    if(!userAuthenticated)
+      })
+    }
+    else
       alert("Username doesn't exist!")
   }
 
