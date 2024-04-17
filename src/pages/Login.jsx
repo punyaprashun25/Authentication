@@ -36,7 +36,8 @@ const Login = () => {
         }
       }
     })
-    if(userAuthenticated)
+
+    if(!userAuthenticated)
       alert("Username doesn't exist!")
   }
 
