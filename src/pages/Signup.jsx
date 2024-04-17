@@ -21,7 +21,6 @@ const Signup = () => {
     setFormData(values => ({ ...values, [name]: value }));
   }
   const isDupUsername = (username)=>{
-    let isDuplicate = false;
     for(let i = 0; i<users.length; i++){
       if(users[i].username === username)
         return true;

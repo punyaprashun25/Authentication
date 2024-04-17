@@ -15,6 +15,7 @@ const Login = () => {
     password: ""
   }
   const [formData, setFormData] = useState(initialState);
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
 
   const HandleOnChange = (event) => {
     const name = event.target.id;
@@ -27,6 +28,7 @@ const Login = () => {
       if (user.username === formData.username) {
         if (user.password === formData.password) {
           dispatch(update({ loggedIn: true, userData: user }))
+          setUserAuthenticated(true);
           Navigate('/');
         }
         else {
@@ -34,7 +36,8 @@ const Login = () => {
         }
       }
     })
-    alert("Username doesn't exist!")
+    if(userAuthenticated)
+      alert("Username doesn't exist!")
   }
 
   return (
